@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="crypto.js"></script>
+    <script src="ellipticcurve.js"></script>
+    <script src="kherwa.js"></script>
+    <script>
+      function getAddress() {
+         KherwaJS.getBitcoinAddress(1).then(function(objArray) {
+          if (objArray && objArray[0].bitcoinAddr) {
+            document.getElementById("addr").textContent = objArray[0].bitcoinAddr;
+            document.getElementById("pub").textContent  = objArray[0].pk;
+            document.getElementById("wif").textContent  = KherwaJS.privkeyToWIF(objArray[0].sk);
+            document.getElementById("seck").textContent = objArray[0].sk;
+            
+          } else {
+            throw new TypeError("Couldn't Generate Address");
+          }
+          
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <button onClick="getAddress()">Get Bitcoin Address</button>
+    <h3>Bitcoin Address</h3>
+    <div id="addr"></div>
+    <h3>Public Key</h3>
+    <div id="pub"></div>
+    <h3>Private key in WIF</h3>
+    <div id="wif"></div>
+    <h3>Private key</h3>
+    <div id="seck"></div>
+ 
+
+  </body>
+
+</html>
